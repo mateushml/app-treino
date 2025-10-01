@@ -69,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
             saveBtn.textContent = "Atualizar";
             cancelEditBtn.classList.remove('hidden');
             
-            // Rola a tela para o topo para ver o formulário
             window.scrollTo(0, 0);
         }
     };
@@ -77,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função para sair do modo de edição
     const sairModoEdicao = () => {
         form.reset();
-        dataInput.valueAsDate = new Date(); // Reseta para a data de hoje
+        dataInput.valueAsDate = new Date();
         treinoIdInput.value = '';
         formTitle.textContent = "Registrar Treino";
         saveBtn.textContent = "Salvar Treino";
@@ -97,10 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let treinos = getTreinos();
 
-        if (id) { // Se tem ID, está atualizando
+        if (id) {
             treinos = treinos.map(t => t.id === Number(id) ? { ...t, ...treino } : t);
-        } else { // Senão, está criando um novo
-            treino.id = Date.now(); // Cria um ID único baseado no tempo
+        } else {
+            treino.id = Date.now();
             treinos.push(treino);
         }
 
@@ -129,11 +128,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Evento para o botão de cancelar edição
     cancelEditBtn.addEventListener('click', sairModoEdicao);
 
-    // Registra o Service Worker (não precisa alterar)
+    // Registra o Service Worker
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('/app-treino/service-worker.js')
-                .then(r => console.log('Service worker registrado'))
+                .then(r => console.log('Service worker registrado com sucesso.'))
                 .catch(e => console.error('Erro no registro do SW:', e));
         });
     }
