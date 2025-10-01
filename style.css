@@ -1,10 +1,17 @@
 :root {
-    --primary-color: #3498db;
-    --secondary-color: #2c3e50;
-    --background-color: #f4f6f8;
+    --primary-color: #4a90e2;
+    --secondary-color: #333;
+    --background-color: #f4f7f6;
     --card-bg-color: #ffffff;
     --text-color: #333;
     --danger-color: #e74c3c;
+    --edit-color: #f39c12;
+
+    /* Cores dos treinos */
+    --cor-a: #3498db;
+    --cor-b: #2ecc71;
+    --cor-c: #e67e22;
+    --cor-corrida: #9b59b6;
 }
 
 body {
@@ -21,33 +28,29 @@ header {
     color: var(--secondary-color);
 }
 
-header h1 {
-    margin: 0;
-}
-
 .card {
     background-color: var(--card-bg-color);
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
 }
 
 label {
     display: block;
     margin-bottom: 0.5rem;
-    font-weight: bold;
+    font-weight: 600;
 }
 
-input[type="text"], textarea {
+input, select {
     width: 100%;
     padding: 0.8rem;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 8px;
     box-sizing: border-box;
     font-size: 1rem;
 }
@@ -56,41 +59,78 @@ button {
     width: 100%;
     padding: 1rem;
     border: none;
-    border-radius: 4px;
-    background-color: var(--primary-color);
+    border-radius: 8px;
     color: white;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, transform 0.1s;
+    margin-top: 0.5rem;
 }
 
-button:hover {
-    background-color: #2980b9;
+button:active {
+    transform: scale(0.98);
 }
 
-button.danger {
-    background-color: var(--danger-color);
+#save-btn {
+    background-color: var(--primary-color);
 }
 
-button.danger:hover {
-    background-color: #c0392b;
+button.hidden {
+    display: none;
 }
 
-#lista-treino-hoje, #historico-treinos ul {
-    list-style: none;
-    padding: 0;
+#cancel-edit-btn {
+    background-color: #7f8c8d;
 }
 
-#lista-treino-hoje li, #historico-treinos li {
-    background-color: #ecf0f1;
-    padding: 0.8rem;
-    border-radius: 4px;
-    margin-bottom: 0.5rem;
+.log-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
 }
 
-#historico-treinos h3 {
-    border-bottom: 2px solid var(--primary-color);
-    padding-bottom: 0.5rem;
-    margin-top: 1.5rem;
+.log-item:last-child {
+    border-bottom: none;
 }
+
+.log-date {
+    font-weight: bold;
+    width: 100px; /* Largura fixa para a data */
+}
+
+.log-details {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.log-tipo {
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-weight: bold;
+    margin-right: 1rem;
+    text-align: center;
+    min-width: 80px;
+}
+
+/* Aplicando as cores por tipo de treino */
+.log-tipo[data-tipo="A"] { background-color: var(--cor-a); }
+.log-tipo[data-tipo="B"] { background-color: var(--cor-b); }
+.log-tipo[data-tipo="C"] { background-color: var(--cor-c); }
+.log-tipo[data-tipo="Corrida"] { background-color: var(--cor-corrida); }
+
+
+.log-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+}
+
+.edit-btn { color: var(--edit-color); }
+.delete-btn { color: var(--danger-color); }

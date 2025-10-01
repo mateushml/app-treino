@@ -3,44 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Diário de Treino</title>
+    <title>Meu Calendário de Treino</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#3498db"/>
+    <meta name="theme-color" content="#4a90e2"/>
 </head>
 <body>
 
     <header>
-        <h1>Meu Diário de Treino</h1>
-        <p id="data-atual"></p>
+        <h1>Meu Calendário de Treino</h1>
     </header>
 
     <main>
-        <div class="card">
-            <h2>Registrar Exercício de Hoje</h2>
-            <form id="form-exercicio">
+        <div class="card" id="form-card">
+            <h2 id="form-title">Registrar Treino</h2>
+            <form id="form-treino">
+                <input type="hidden" id="treino-id">
+
                 <div class="form-group">
-                    <label for="exercicio">Exercício</label>
-                    <input type="text" id="exercicio" placeholder="Ex: Supino Reto" required>
+                    <label for="treino-data">Data do Treino</label>
+                    <input type="date" id="treino-data" required>
                 </div>
+
                 <div class="form-group">
-                    <label for="detalhes">Séries, Repetições e Carga</label>
-                    <textarea id="detalhes" rows="3" placeholder="Ex: 3x10 com 50kg" required></textarea>
+                    <label for="treino-tipo">Qual treino você fez?</label>
+                    <select id="treino-tipo" required>
+                        <option value="" disabled selected>Selecione o treino</option>
+                        <option value="A">Treino A (Peito, Tríceps, Ombro)</option>
+                        <option value="B">Treino B (Bíceps e Costas)</option>
+                        <option value="C">Treino C (Pernas)</option>
+                        <option value="Corrida">Corrida</option>
+                    </select>
                 </div>
-                <button type="submit">Adicionar Exercício</button>
+
+                <div class="form-group">
+                    <label for="treino-tempo">Tempo do Treino (minutos)</label>
+                    <input type="number" id="treino-tempo" placeholder="Ex: 60" required>
+                </div>
+
+                <button type="submit" id="save-btn">Salvar Treino</button>
+                <button type="button" id="cancel-edit-btn" class="hidden">Cancelar Edição</button>
             </form>
         </div>
 
         <div class="card">
-            <h2>Treino do Dia</h2>
-            <ul id="lista-treino-hoje">
-                </ul>
-            <button id="limpar-tudo" class="danger">Limpar Histórico Completo</button>
-        </div>
-
-        <div class="card">
-            <h2>Histórico de Treinos</h2>
+            <h2>Histórico</h2>
             <div id="historico-treinos">
+                <p>Nenhum treino registrado ainda.</p>
                 </div>
         </div>
     </main>
